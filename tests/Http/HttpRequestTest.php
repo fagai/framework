@@ -645,6 +645,9 @@ class HttpRequestTest extends TestCase
         $this->assertSame(123456, $request->integer('unknown_key', 123456));
         $this->assertSame(0, $request->integer('null'));
         $this->assertSame(0, $request->integer('null', 123456));
+        $this->assertSame(123, $request->integer('int', null));
+        $this->assertSame(0, $request->integer('nan', null));
+        $this->assertNull($request->integer('null', null));
     }
 
     public function testFloatMethod()
@@ -671,6 +674,9 @@ class HttpRequestTest extends TestCase
         $this->assertSame(123.456, $request->float('unknown_key', 123.456));
         $this->assertSame(0.0, $request->float('null'));
         $this->assertSame(0.0, $request->float('null', 123.456));
+        $this->assertSame(1.23, $request->float('float', null));
+        $this->assertSame(0.0, $request->float('nan', null));
+        $this->assertNull($request->float('null', null));
     }
 
     public function testCollectMethod()

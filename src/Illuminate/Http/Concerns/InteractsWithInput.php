@@ -346,25 +346,41 @@ trait InteractsWithInput
     /**
      * Retrieve input as an integer value.
      *
+     * @template T of int|null
+     *
      * @param  string  $key
-     * @param  int  $default
-     * @return int
+     * @param  T  $default
+     * @return T|int
      */
     public function integer($key, $default = 0)
     {
-        return intval($this->input($key, $default));
+        $value = $this->input($key, $default);
+
+        if (is_null($value) && is_null($default)) {
+            return $default;
+        }
+
+        return intval($value);
     }
 
     /**
      * Retrieve input as a float value.
      *
+     * @template T of float|null
+     *
      * @param  string  $key
-     * @param  float  $default
-     * @return float
+     * @param  T  $default
+     * @return T|float
      */
     public function float($key, $default = 0.0)
     {
-        return floatval($this->input($key, $default));
+        $value = $this->input($key, $default);
+
+        if (is_null($value) && is_null($default)) {
+            return $default;
+        }
+
+        return floatval($value);
     }
 
     /**
